@@ -1,10 +1,13 @@
 const http = require('http');
 
+
+const port = 3000;
 const server = http.createServer(requestHandler);
 
 function requestHandler(req, res) {
-    res.write('hello world!');
+    console.log('>>>', req.method, req.url);
+    res.write('hello!');
     res.end();
 }
 
-server.listen(3000);
+server.listen(port, () => console.log('Server listening on port ' + port));
