@@ -1,20 +1,12 @@
 const http = require('http');
+
 const router = require('./router');
 
-router.registerHander('/', (req, res) => {
-    res.write(homePage);
-    res.end();
-});
+const homeController = require('./controllers/homeController');
+const aboutController = require('./controllers/aboutController');
 
-const homePage = `
-<html>
-<body>
-    <div>
-        <h1>My Page</h1>
-        <p>Welcome to My Page!</p>
-    </div>
-</body>
-</html>`;
+router.registerHander('/', homeController);
+router.registerHander('/about', aboutController)
 
 const port = 3000;
 const server = http.createServer(requestHandler);
