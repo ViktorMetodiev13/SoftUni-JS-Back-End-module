@@ -5,7 +5,7 @@ function getContentType(url) {
 
     if (url.endsWith('css')) {
         return 'text/css';
-    } else if (url.endsWith('html') || url.endsWith('png') || url.endsWith('js') || url.endsWith('json')) {
+    } else if (url.endsWith('html') || url.endsWith('png') || url.endsWith('js') || url.endsWith('json') || url.endsWith('ico')) {
         return true;
     }
 }
@@ -15,7 +15,7 @@ module.exports = (req, res) => {
 
     if (pathname.startsWith('/content') && req.method == 'GET') {
         fs.readFile(`./${pathname}`, (error, data) => {
-            if (error) {
+            if (error == true || pathname == undefined) {
                 console.log(error);
                 res.writeHead(404, {
                     'Content-Type': 'text/plain'
