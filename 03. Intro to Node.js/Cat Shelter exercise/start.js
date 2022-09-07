@@ -4,7 +4,10 @@ const handlers = require('./handlers/index');
 
 
 http.createServer((req, res) => {
-    res.write(handlers);
-    res.end();
+    for (const handler of handlers) {
+        if (!handler(req, res)) {
+            break;
+        }
+    }
 
-}).listen(port);
+}).listen(port, () => console.log('Server listening on port ' + port));
