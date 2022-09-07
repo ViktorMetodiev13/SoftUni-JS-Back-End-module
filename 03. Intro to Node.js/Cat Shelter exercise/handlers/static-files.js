@@ -1,6 +1,5 @@
-const images = require('../content/images');
-const styles = require('../content/styles');
 const fs = require('fs');
+const url = require('url');
 
 function getContentType(url) {
 
@@ -15,7 +14,7 @@ module.exports = (req, res) => {
     const pathname = url.parse(req.url).pathname;
 
     if (pathname.startsWith('/content') && req.method == 'GET') {
-        fs.readFile(`./${pathname}`, 'wtf-8', (error, data) => {
+        fs.readFile(`./${pathname}`, (error, data) => {
             if (error) {
                 console.log(error);
                 res.writeHead(404, {
