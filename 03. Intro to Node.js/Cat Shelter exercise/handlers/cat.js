@@ -52,6 +52,35 @@ module.exports = (req, res) => {
             res.write(data);
             res.end();
         })
+    } else if (pathname == '/cats/add-cat' && req.method == 'POST') {
+        let formData = '';
+
+        res.on('data', (data) => {
+            formData = data;
+        });
+
+        res.on('end', () => {
+            let body = qs.parse(formData);
+
+            fs.readFile('../data/breeds.json', (err, data) => {
+                if (err) {
+                    throw err;
+                }
+
+                let breed = JSON.parse(data);
+                breeds.push(breed);
+                let json = JSON.stringify(breeds);
+
+                // fs.writeFile('../data/breeds.json', json, () => {
+                //     console.log('The breed was uploaded successfully!');
+                // });
+            });
+
+            res.writeHead(200, { location: '/' });
+            res.end();
+        });
+    } else if (pathname == 'cats/add-breed' && req.method == 'POST') {
+
     } else {
         return true;
     }
