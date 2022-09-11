@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 router.get('/catalog', (req, res) => {
-    res.send('Catalog page real one');
+    res.send('Catalog page');
 });
 
 const data = {
