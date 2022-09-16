@@ -1,5 +1,6 @@
 const express = require('express');
 const hbs = require('express-handlebars');
+
 const { about } = require('./controllers/about');
 const { catalog } = require('./controllers/catalog');
 const { create, post } = require('./controllers/create');
@@ -20,7 +21,9 @@ app.use('/static', express.static('static'));
 app.get('/', catalog);
 app.get('/about', about);
 app.get('/create', create);
-app.get('/details', details);
-app.get('*', notFound);
+app.get('/details/:id', details);
+app.post('/create', post)
+
+app.all('*', notFound);
 
 app.listen(port, () => console.log(`Server running on port ${port}`));
