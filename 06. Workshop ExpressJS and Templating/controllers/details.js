@@ -1,5 +1,8 @@
+const { getById } = require('../models/storage')
+
 module.exports = {
-    details: (req, res) => {
-        res.render('details', {title:'Details'})
+    details: async (req, res) => {
+        res.render('details', { title: 'Details' })
+        //const id = req.url.split('/details/').join('');
     }
 }

@@ -35,7 +35,7 @@ async function create(cube) {
     data[id] = cube;
 
     try {
-        fs.writeFile('./models/data.json', JSON.stringify(data))
+        fs.writeFile('./models/data.json', JSON.stringify(data, null, 2))
     } catch (error) {
         console.error('Failed to save the cube');
     }

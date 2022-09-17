@@ -1,1 +1,24 @@
-{"1xzeabgl85yechw":{"name":"test","description":"testing the functionality","difficultyLevel":"2"}}
+{
+  "1xzeabgl85yechw": {
+    "name": "test",
+    "description": "testing the functionality",
+    "difficultyLevel": "2"
+  },
+  "1xzee6kl85yocv6": {
+    "name": "Eco-Dark",
+    "description": "...",
+    "difficultyLevel": "6"
+  },
+  "1xzedu0l85yrdem": {
+    "name": "Eco-Dark",
+    "description": "desc2",
+    "imageUrl": "https://thingsidesire.com/wp-content/uploads/2018/06/Eco-Dark-Rubik%E2%80%99s-Cube2.jpg",
+    "difficultyLevel": "5"
+  },
+  "1xze9iwl861cnb1": {
+    "name": "New cube",
+    "description": "Newest cube in the colleciton",
+    "imageUrl": "https://imgs.search.brave.com/GHaSguhgM0OxSTJVH9qTlW3Mtw5pUrgFZQpyHhDv4-U/rs:fit:655:225:1/g:ce/aHR0cHM6Ly90c2Uz/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC42/SlFFeFFIZWZoQUpr/Tm5aUlpMc3FnSGFG/WCZwaWQ9QXBp",
+    "difficultyLevel": "3"
+  }
+}
