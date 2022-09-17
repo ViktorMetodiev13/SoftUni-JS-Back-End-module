@@ -2,7 +2,16 @@ const { getById } = require('../models/storage')
 
 module.exports = {
     details: async (req, res) => {
-        res.render('details', { title: 'Details' })
-        //const id = req.url.split('/details/').join('');
+        const cube = await getById(req.params.id)
+        
+        if (cube == undefined) {
+            res.redirect('/404')
+        } else {
+            let ctx = {
+                title: 'Cubicle',
+                cube
+            }
+            res.render('details', ctx);
+        }
     }
 }
