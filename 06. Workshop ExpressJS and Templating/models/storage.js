@@ -29,10 +29,10 @@ async function getAll(query) {
         cubes = cubes.filter(c => c.name.toLowerCase().includes(query.search.toLowerCase()));
     }
     if (query.from) {
-        cubes = cubes.filter(c => Number(c.difficultyLevel) >= Number(query.from));
+        cubes = cubes.filter(c => c.difficultyLevel >= Number(query.from));
     }
     if (query.to) {
-        cubes = cubes.filter(c => Number(c.difficultyLevel) <= Number(query.from));
+        cubes = cubes.filter(c => c.difficultyLevel <= Number(query.to));
     }
 
     return cubes;

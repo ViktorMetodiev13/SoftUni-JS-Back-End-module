@@ -6,7 +6,10 @@ module.exports = {
 
         const ctx = {
             title: 'Cubicle',
-            cubes
+            cubes,
+            search: req.query.search || '',
+            from: req.query.from || '',
+            to: req.query.to || '',
         }
 
         res.render('index', ctx);
