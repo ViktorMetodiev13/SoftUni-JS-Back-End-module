@@ -1,5 +1,6 @@
 module.exports = {
     notFound: (req, res) => {
-        res.render('404', { layout: false });
+        res.render('404', {title: 'Page Not Found'});
+        res.end();
     }
 }

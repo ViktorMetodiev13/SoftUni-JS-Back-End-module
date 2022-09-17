@@ -20,9 +20,9 @@ app.use('/static', express.static('static'));
 
 app.get('/', catalog);
 app.get('/about', about);
-app.get('/create', create);
 app.get('/details/:id', details);
-app.post('/create', post)
+app.get('/create', create);
+app.post('/create', post);
 
 app.all('*', notFound);
 
