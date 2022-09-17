@@ -2,7 +2,7 @@ const { getAll } = require("../models/storage");
 
 module.exports = {
     catalog: async (req, res) => {
-        const cubes = await getAll();
+        const cubes = await getAll(req.query);
 
         const ctx = {
             title: 'Cubicle',
