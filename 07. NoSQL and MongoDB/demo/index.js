@@ -15,9 +15,7 @@ client.connect((err) => {
 
     const db = client.db('testdb');
     const colletion = db.collection('cats');
-    colletion.insertOne({'name': 'Tom'}, (err, result) => {
-        colletion.find({}).toArray((err, data) => {
-            console.log(data);
-        });
+    colletion.find({}).toArray((err, data) => {
+        console.log(data);
     });
 });
