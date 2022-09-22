@@ -12,4 +12,12 @@ client.connect((err) => {
     }
 
     console.log(`Database connected`);
-})
+
+    const db = client.db('testdb');
+    const colletion = db.collection('cats');
+    colletion.insertOne({'name': 'Tom'}, (err, result) => {
+        colletion.find({}).toArray((err, data) => {
+            console.log(data);
+        });
+    });
+});
