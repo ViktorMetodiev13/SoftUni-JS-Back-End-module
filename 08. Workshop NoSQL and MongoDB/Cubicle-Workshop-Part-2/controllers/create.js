@@ -1,9 +1,6 @@
-const { create } = require("../models/storage");
-
 module.exports = {
     create: (req, res) => {
         res.render('create', {title:'Create Cube'});
-        
     },
     post: async (req, res) => {
         let cube = {
@@ -12,7 +9,7 @@ module.exports = {
             imageUrl: req.body.imageUrl,
             difficultyLevel: Number(req.body.difficultyLevel)
         }
-        await create(cube);
+        await req.storage.create(cube);
         
         res.redirect('/');
     }

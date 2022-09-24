@@ -1,26 +1,22 @@
-const expressConfig = require('./config/express');
-const routesConfig = require('./config/routes');
 const express = require('express');
-const mongoose = require('mongoose');
+const expressConfig = require('./config/express');
+const databaseConfig = require('./config/database')
+const routesConfig = require('./config/routes');
 
-const { init: storage } = require('./models/storage')
+
+const { init: storage } = require('./services/storage');
 
 start();
 
 async function start() {
     const port = 3000;
-    const connectionStr = 'mongodb://localhost:27017';
     const app = express();
 
     expressConfig(app);
-    routesConfig(app);
-
-    app.use(await storage());
+    await databaseConfig(app);
     
-    const client = await mongoose.connect(connectionStr, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    });
+    app.use(await storage());
+    routesConfig(app);
 
     app.listen(port, () => console.log(`Server running on port ${port}`));
 }
