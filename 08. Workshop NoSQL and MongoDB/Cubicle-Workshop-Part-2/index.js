@@ -1,5 +1,8 @@
 const express = require('express');
 const hbs = require('express-handlebars');
+const mongoose = require('mongoose');
+
+const url = 'mongodb://localhost:27017';
 
 const { init: storage } = require('./models/storage')
 
@@ -15,6 +18,9 @@ async function start() {
 
     const app = express();
     const port = 3000;
+
+    await mongoose.connect(url);
+    console.log('Success!');
 
     app.engine('hbs', hbs({
         extname: '.hbs'
