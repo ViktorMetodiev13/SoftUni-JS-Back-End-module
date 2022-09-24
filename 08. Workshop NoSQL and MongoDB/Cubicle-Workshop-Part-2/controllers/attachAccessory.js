@@ -1,5 +1,5 @@
 module.exports = {
-    accessory: (req, res) => {
+    attachAccessory: (req, res) => {
         res.render('attachAccessory', { title: 'Attach Accessory' });
     }
 }
