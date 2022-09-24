@@ -8,10 +8,10 @@ module.exports = {
             res.redirect('/404')
         } else {
             let ctx = {
-                title: 'Cubicle',
+                title: 'Details',
                 cube
             }
-            res.render('details', ctx);
+            res.render('updatedDetailsPage', ctx);
         }
     }
 }
