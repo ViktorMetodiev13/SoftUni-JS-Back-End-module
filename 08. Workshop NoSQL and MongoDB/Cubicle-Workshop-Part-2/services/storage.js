@@ -1,6 +1,5 @@
-const fs = require('fs/promises');
-const uniqId = require('uniqid');
 const Cube = require('../models/Cube');
+const Accessory = require('../models/Accessory');
 
 let data = {};
 
