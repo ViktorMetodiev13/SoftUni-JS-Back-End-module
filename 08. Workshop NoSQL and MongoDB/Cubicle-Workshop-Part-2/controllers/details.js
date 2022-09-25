@@ -15,7 +15,7 @@ module.exports = {
     attach: async (req, res) => {
         const cube = await req.storage.getById(req.params.id);
         const accessories = await req.storage.getAllAccessories();
-        res.render('attach', { title: 'Attach Stickers' })
-        //res.render('attach', { title: 'Attach Stickers', cube, accessories })
+
+        res.render('attach', { title: 'Attach Stickers', cube, accessories });
     }
 }
