@@ -22,7 +22,7 @@ async function init() {
 }
 
 async function getAll(query) {
-    const cubes = Cube.find({});
+    const cubes = Cube.find({}).lean();
 
     /*
     if (query.search) {
@@ -40,7 +40,12 @@ async function getAll(query) {
 }
 
 async function getById(id) {
-    return data[id];
+    const cube = await Cube.findById(id).lean();
+    if (cube) {
+        return cube;
+    } else {
+        return undefined;
+    }
 }
 
 async function create(cube) {

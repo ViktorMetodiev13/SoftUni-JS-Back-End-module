@@ -1,7 +1,7 @@
 module.exports = {
     details: async (req, res) => {
         const cube = await req.storage.getById(req.params.id)
-        
+
         if (cube == undefined) {
             res.redirect('/404')
         } else {
@@ -9,7 +9,7 @@ module.exports = {
                 title: 'Details',
                 cube
             }
-            res.render('updatedDetailsPage', ctx);
+            res.render('details', ctx);
         }
     }
 }
