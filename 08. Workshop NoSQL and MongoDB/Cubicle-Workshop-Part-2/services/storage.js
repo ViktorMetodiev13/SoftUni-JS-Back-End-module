@@ -5,12 +5,6 @@ const Cube = require('../models/Cube');
 let data = {};
 
 async function init() {
-    try {
-        data = JSON.parse(await fs.readFile('./models/data.json'));
-    } catch (err) {
-        console.error('Error reading database');
-    }
-
     return (req, res, next) => {
         req.storage = {
             getAll,
@@ -22,19 +16,20 @@ async function init() {
 }
 
 async function getAll(query) {
-    const cubes = Cube.find({}).lean();
+    const options = {};
 
-    /*
     if (query.search) {
-        cubes = cubes.filter(c => c.name.toLowerCase().includes(query.search.toLowerCase()));
+        options.name = { $regex: query.search, $options: 'i' };
     }
     if (query.from) {
-        cubes = cubes.filter(c => c.difficulty >= Number(query.from));
+        options.difficulty = { $gte: Number(query.from) };
     }
     if (query.to) {
-        cubes = cubes.filter(c => c.difficulty <= Number(query.to));
+        options.difficulty = options.difficulty || {};
+        options.difficulty.$lt = Number(query.to);
     }
-    */
+
+    const cubes = Cube.find(options).lean();
 
     return cubes;
 }
