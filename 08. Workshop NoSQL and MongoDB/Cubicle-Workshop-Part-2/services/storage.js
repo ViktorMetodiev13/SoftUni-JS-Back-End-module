@@ -9,7 +9,8 @@ async function init() {
             getAll,
             getById,
             create,
-            createAccessory
+            createAccessory,
+            getAllAccessories
         };
         next();
     }
@@ -32,6 +33,10 @@ async function getAll(query) {
     const cubes = Cube.find(options).lean();
 
     return cubes;
+}
+
+async function getAllAccessories() {
+    return Accessory.find({}).lean();
 }
 
 async function getById(id) {
@@ -58,5 +63,6 @@ module.exports = {
     getAll,
     getById,
     create,
-    createAccessory
+    createAccessory,
+    getAllAccessories
 }
