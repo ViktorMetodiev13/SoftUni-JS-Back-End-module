@@ -22,22 +22,21 @@ async function init() {
 }
 
 async function getAll(query) {
-    let cubes = Object
-        .entries(data)
-        .map(([id, v]) => Object.assign({}, { id }, v));
+    const cubes = Cube.find({});
 
+    /*
     if (query.search) {
         cubes = cubes.filter(c => c.name.toLowerCase().includes(query.search.toLowerCase()));
     }
     if (query.from) {
-        cubes = cubes.filter(c => c.difficultyLevel >= Number(query.from));
+        cubes = cubes.filter(c => c.difficulty >= Number(query.from));
     }
     if (query.to) {
-        cubes = cubes.filter(c => c.difficultyLevel <= Number(query.to));
+        cubes = cubes.filter(c => c.difficulty <= Number(query.to));
     }
+    */
 
     return cubes;
-
 }
 
 async function getById(id) {
@@ -47,14 +46,6 @@ async function getById(id) {
 async function create(cube) {
     const record = new Cube(cube);
     return record.save();
-}
-
-async function persist() {
-    try {
-        await fs.writeFile('../models/data.json', JSON.stringify(data, null, 2));
-    } catch (err) {
-        console.error('Error writing out database')
-    }
 }
 
 module.exports = {
