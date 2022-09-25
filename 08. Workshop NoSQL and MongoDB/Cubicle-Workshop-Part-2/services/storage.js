@@ -8,7 +8,8 @@ async function init() {
         req.storage = {
             getAll,
             getById,
-            create
+            create,
+            createAccessory
         };
         next();
     }
@@ -47,9 +48,15 @@ async function create(cube) {
     return record.save();
 }
 
+async function createAccessory(accessory) {
+    const record = new Accessory(accessory);
+    return record.save();
+}
+
 module.exports = {
     init,
     getAll,
     getById,
-    create
+    create,
+    createAccessory
 }

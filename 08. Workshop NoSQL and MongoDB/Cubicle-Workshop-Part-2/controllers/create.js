@@ -11,7 +11,6 @@ module.exports = {
         }
         try {
             await req.storage.create(cube);
-            
         } catch (error) {
             if (error.name == 'ValidationError') {
                 return res.render('create', {title: 'Create Cube', error: 'All fields are required!'})

@@ -3,7 +3,7 @@ const { catalog } = require('../controllers/catalog');
 const { create, post } = require('../controllers/create');
 const { details } = require('../controllers/details');
 const { notFound } = require('../controllers/notFound');
-const { createAccessory } = require('../controllers/accessory');
+const { createAccessory, accessoryPost } = require('../controllers/accessory');
 
 
 module.exports = (app) => {
@@ -13,6 +13,8 @@ module.exports = (app) => {
     app.get('/create', create);
     app.get('/accessory/create', createAccessory)
     app.post('/create', post);
+
+    app.post('/accessory/create', accessoryPost)
 
     app.all('*', notFound);
 }
