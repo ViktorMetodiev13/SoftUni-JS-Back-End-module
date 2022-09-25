@@ -26,7 +26,7 @@ async function getAll(query) {
     }
     if (query.to) {
         options.difficulty = options.difficulty || {};
-        options.difficulty.$lt = Number(query.to);
+        options.difficulty.$lte = Number(query.to);
     }
 
     const cubes = Cube.find(options).lean();
