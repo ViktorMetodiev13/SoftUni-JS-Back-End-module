@@ -1,12 +1,15 @@
 const express = require('express');
+const cookieParser = require('cookie-parser');
 
 const app = express();
 const port = 3000;
 
-app.get('/', (req, res) => {
-    res.setHeader('Set-Cookie', 'sessionid=1');
+app.use(cookieParser());
 
-    res.send('Hello');
+app.get('/', (req, res) => {
+    res.cookie('cookieParser_Cookie', 1);
+    res.cookie('My_COOKIE', 'HI');
+    res.send('Hello')
 });
 
 app.listen(port, () => console.log(`Server running on port ${port}`));
