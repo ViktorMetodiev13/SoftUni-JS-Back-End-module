@@ -1,16 +1,19 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const expressSession = require('express-session')
 
 const app = express();
 const port = 3000;
 
 app.use(cookieParser());
+app.use(expressSession({
+    secret: 'My random secret',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false }
+}));
 
 app.get('/', (req, res) => {
-    console.log(req.cookies);
-
-    res.cookie('cookieParser_Cookie', 1);
-    res.cookie('My_COOKIE', 'HI');
     res.send('Hello')
 });
 
