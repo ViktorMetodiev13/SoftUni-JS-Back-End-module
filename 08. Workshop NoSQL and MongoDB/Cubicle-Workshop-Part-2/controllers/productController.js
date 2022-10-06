@@ -40,6 +40,7 @@ router.post('/create', async (req, res) => {
 });
 
 router.get('/details/:id', async (req, res) => {
+    console.log(req.storage);
     const cube = await req.storage.getById(req.params.id);
 
     if (cube == undefined) {
@@ -53,20 +54,20 @@ router.get('/details/:id', async (req, res) => {
     }
 });
 
-// router.get('/edit/:id', async (res, req) => {
-//     const cube = await req.storage.getById(req.params.id);
-//     cube[`select${cube.difficulty}`] = true;
+router.get('/edit/:id', async (res, req) => {
+    const cube = await req.storage.getById(req.params.id);
+    cube[`select${cube.difficulty}`] = true;
 
-//     if(!cube) {
-//         res.redirect('404');
-//     } else {
-//         const ctx = {
-//             title: 'Edit Cube',
-//             cube
-//         }
-//         res.render('edit', ctx)
-//     }
-// });
+    if(!cube) {
+        res.redirect('/404');
+    } else {
+        const ctx = {
+            title: 'Edit Cube',
+            cube
+        }
+        res.render('edit', ctx)
+    }
+});
 
 router.post('/edit/:id', async (req, res) => {
     const cube = {
@@ -79,18 +80,18 @@ router.post('/edit/:id', async (req, res) => {
         await req.storage.edit(req.params.id, cube);
         res.redirect('/');
     } catch (err) {
-        res.redirect('404');
+        res.redirect('/404');
     }
 });
 
-router.get('/attach/:id', async (req, res) => {
-    const cube = await req.storage.getById(req.params.id);
+router.get('/attach/:cubeId', async (req, res) => {
+    const cube = await req.storage.getById(req.params.cubeId);
     const accessories = await req.storage.getAllAccessories();
 
     res.render('attach', { title: 'Attach Stickers', cube, accessories });
 });
 
-router.post('/attach/:id', async (req, res) => {
+router.post('/attach/:cubeId', async (req, res) => {
     const cubeId = req.params.cubeId;
     const stickerId = req.body.accessory;
 

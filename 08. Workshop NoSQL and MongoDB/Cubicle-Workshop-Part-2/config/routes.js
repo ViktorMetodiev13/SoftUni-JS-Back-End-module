@@ -3,7 +3,7 @@ const { register } = require('../controllers/register');
 
 const productController = require('../controllers/productController');
 const accessoryController = require('../controllers/accessoryController');
-const homeController = require('../controllers/homeController')
+const homeController = require('../controllers/homeController');
 
 
 module.exports = (app) => {
@@ -12,6 +12,7 @@ module.exports = (app) => {
 
     app.get('/login', login);
     app.get('/register', register);
+    
 
     app.use('/', homeController);
 }
