@@ -5,7 +5,7 @@ const routesConfig = require('./config/routes');
 const cookieParser = require('cookie-parser');
 
 
-const { init: storage } = require('./services/storage');
+const storage = require('./middlewares/storage');
 
 start();
 

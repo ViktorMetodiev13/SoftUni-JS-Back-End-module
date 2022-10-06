@@ -53,20 +53,20 @@ router.get('/details/:id', async (req, res) => {
     }
 });
 
-router.get('/edit/:id', async (res, req) => {
-    const cube = await req.storage.getById(req.params.id);
-    cube[`select${cube.difficulty}`] = true;
+// router.get('/edit/:id', async (res, req) => {
+//     const cube = await req.storage.getById(req.params.id);
+//     cube[`select${cube.difficulty}`] = true;
 
-    if(!cube) {
-        res.redirect('404');
-    } else {
-        const ctx = {
-            title: 'Edit Cube',
-            cube
-        }
-        res.render('edit', ctx)
-    }
-});
+//     if(!cube) {
+//         res.redirect('404');
+//     } else {
+//         const ctx = {
+//             title: 'Edit Cube',
+//             cube
+//         }
+//         res.render('edit', ctx)
+//     }
+// });
 
 router.post('/edit/:id', async (req, res) => {
     const cube = {

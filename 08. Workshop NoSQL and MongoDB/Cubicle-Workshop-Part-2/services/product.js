@@ -1,21 +1,6 @@
 const Cube = require('../models/Cube');
 const Accessory = require('../models/Accessory');
 
-let data = {};
-
-async function init() {
-    return (req, res, next) => {
-        req.storage = {
-            getAll,
-            getById,
-            create,
-            createAccessory,
-            getAllAccessories
-        };
-        next();
-    }
-}
-
 async function getAll(query) {
     const options = {};
 
@@ -35,10 +20,6 @@ async function getAll(query) {
     return cubes;
 }
 
-async function getAllAccessories() {
-    return Accessory.find({}).lean();
-}
-
 async function getById(id) {
     const cube = await Cube.findById(id).lean();
     if (cube) {
@@ -53,16 +34,32 @@ async function create(cube) {
     return record.save();
 }
 
-async function createAccessory(accessory) {
-    const record = new Accessory(accessory);
-    return record.save();
+async function attachSticker(cubeId, stickerId) {
+    const cube = await Cube.findById(cubeId);
+    const sticker = await Accessory.findById(stickerId);
+    if (!cube || !sticker) {
+        throw new ReferenceError(`No such ID in database`);
+    }
+
+    cube.accessories.push(sticker);
+    return cube.save();
+}
+
+async function edit(id, cube) {
+    const existing = await Cube.findById(id);
+
+    if (!existing) {
+        throw new ReferenceError('No such ID in database');
+    }
+
+    Object.assign(existing, cube);
+    return existing.save();
 }
 
 module.exports = {
-    init,
     getAll,
     getById,
     create,
-    createAccessory,
-    getAllAccessories
+    attachSticker,
+    edit
 }
