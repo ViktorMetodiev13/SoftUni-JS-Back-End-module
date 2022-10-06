@@ -58,7 +58,7 @@ router.get('/edit/:id', async (res, req) => {
     const cube = await req.storage.getById(req.params.id);
     cube[`select${cube.difficulty}`] = true;
 
-    if(!cube) {
+    if (!cube) {
         res.redirect('/404');
     } else {
         const ctx = {
