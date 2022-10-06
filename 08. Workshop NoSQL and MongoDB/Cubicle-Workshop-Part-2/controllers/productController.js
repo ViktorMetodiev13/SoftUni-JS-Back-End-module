@@ -39,11 +39,11 @@ router.post('/create', async (req, res) => {
     res.redirect('/');
 });
 
-router.get('/details', async (req, res) => {
+router.get('/details/:id', async (req, res) => {
     const cube = await req.storage.getById(req.params.id);
 
     if (cube == undefined) {
-        res.redirect('/404')
+        res.redirect('/404');
     } else {
         let ctx = {
             title: 'Cubicle',
@@ -81,6 +81,22 @@ router.post('/edit/:id', async (req, res) => {
     } catch (err) {
         res.redirect('404');
     }
+});
+
+router.get('/attach/:id', async (req, res) => {
+    const cube = await req.storage.getById(req.params.id);
+    const accessories = await req.storage.getAllAccessories();
+
+    res.render('attach', { title: 'Attach Stickers', cube, accessories });
+});
+
+router.post('/attach/:id', async (req, res) => {
+    const cubeId = req.params.cubeId;
+    const stickerId = req.body.accessory;
+
+    await req.storage.attachSticker(cubeId, stickerId);
+
+    res.redirect(`datails/${cubeId}`)
 });
 
 module.exports = router;
