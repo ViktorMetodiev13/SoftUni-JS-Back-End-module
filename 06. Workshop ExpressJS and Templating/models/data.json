@@ -10,5 +10,11 @@
     "description": "Newest cube in the colleciton",
     "imageUrl": "https://imgs.search.brave.com/GHaSguhgM0OxSTJVH9qTlW3Mtw5pUrgFZQpyHhDv4-U/rs:fit:655:225:1/g:ce/aHR0cHM6Ly90c2Uz/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC42/SlFFeFFIZWZoQUpr/Tm5aUlpMc3FnSGFG/WCZwaWQ9QXBp",
     "difficultyLevel": "3"
+  },
+  "1xze9jsl862wcdv": {
+    "name": "Rubic Cube Unsolved",
+    "description": "This is the unsolved rubic cube",
+    "imageUrl": "https://imgs.search.brave.com/rvb40bVXNyWrdthc386FCIdNbYg90tKfxTSAALUx9VM/rs:fit:713:225:1/g:ce/aHR0cHM6Ly90c2Ux/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5B/R3puQ1ZTMG5nSW5p/aUxYdEhva2pBSGFF/NyZwaWQ9QXBp",
+    "difficultyLevel": 4
   }
 }
