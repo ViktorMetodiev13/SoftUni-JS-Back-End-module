@@ -90,7 +90,7 @@ router.post('/edit/:id', preloadCube(), isOwner(), async (req, res) => {
     }
 });
 
-router.get('/attach/:cubeId', async (req, res) => {
+router.get('/details/:cubeId/attach', async (req, res) => {
     const cube = await req.storage.getById(req.params.cubeId);
     const accessories = await req.storage.getAllAccessories((cube.accessories || []).map(a => a._id));
 
@@ -101,7 +101,7 @@ router.get('/attach/:cubeId', async (req, res) => {
     });
 });
 
-router.post('/attach/:cubeId', async (req, res) => {
+router.post('/details/:cubeId/attach', async (req, res) => {
     const cubeId = req.params.cubeId;
     const stickerId = req.body.accessory;
 

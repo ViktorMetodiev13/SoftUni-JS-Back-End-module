@@ -14,7 +14,6 @@ module.exports = (app) => {
             reject(err.message);
         });
         db.on('open', () => {
-            console.log('Database connected');
             resolve();
         });
     });
