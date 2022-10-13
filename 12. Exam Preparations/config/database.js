@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { CONNECTION_STRING } = require('./index');
+const { DB_CONNECTION_STRING: CONNECTION_STRING } = require('./index');
 
 module.exports = (app) => {
     return new Promise((resolve, reject) => {
