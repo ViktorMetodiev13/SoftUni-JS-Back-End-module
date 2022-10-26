@@ -9,9 +9,9 @@ module.exports = (app) => {
         next(new Error('propagating error'));
     })
 
-    app.use((err, req, res, next) => {
-        console.log('Global error handling');
-        console.log(err.message);
-        res.redirect('/');
-    })
+    // app.use((err, req, res, next) => {
+    //     console.log('Global error handling');
+    //     console.log(err.message);
+    //     res.redirect('/');
+    // })
 }
