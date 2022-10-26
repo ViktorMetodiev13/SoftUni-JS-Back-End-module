@@ -24,7 +24,6 @@ authController.post('/register', async (req, res) => {
         res.cookie('token', token);
         res.redirect('/auth/register');
     } catch (error) {
-        // TODO add error parser
         const errors = parseError(error);
 
         // TODO add error display to actual remplate from assignment
@@ -37,5 +36,26 @@ authController.post('/register', async (req, res) => {
         })
     }
 });
+
+authController.get('/login', (req, res) => {
+    res.render('login', {
+        title: 'Login Page'
+    });
+});
+
+authController.post('/login', (req, res) => {
+    try {
+        
+    } catch (error) {
+        const errors = parseError(error);
+        res.render('login', {
+            title: 'Login Page',
+            errors,
+            body: {
+                username: req.body.username
+            }
+        })
+    }
+})
 
 module.exports = authController;
