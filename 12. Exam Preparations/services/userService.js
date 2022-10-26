@@ -41,12 +41,12 @@ async function createSession({ _id, username }) {
     return token
 }
 
-async function veiryToken() {
+async function verifyToken() {
 
 }
 
 module.exports = {
     register,
     login,
-
+    verifyToken
 }
