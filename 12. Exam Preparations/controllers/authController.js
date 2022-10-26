@@ -1,4 +1,5 @@
 const { register } = require('../services/userService');
+const { parseError } = require('../util/parser');
 
 const authController = require('express').Router();
 
@@ -10,6 +11,7 @@ authController.get('/register', (req, res) => {
 });
 
 authController.post('/register', async (req, res) => {
+    console.log(req.body);
     try {
         if (req.body.username == '' || req.body.username == '') {
             throw new Error('All fields are required!');
@@ -23,12 +25,12 @@ authController.post('/register', async (req, res) => {
         res.redirect('/auth/register');
     } catch (error) {
         // TODO add error parser
-        const errors = [error.message];
+        const errors = parseError(error);
 
         // TODO add error display to actual remplate from assignment
         res.render('register', {
             title: 'Register Page',
-            error,
+            errors,
             body: {
                 username: req.body.username
             }
