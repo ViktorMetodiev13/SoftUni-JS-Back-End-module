@@ -5,11 +5,7 @@ const userSchema = new Schema({
     hashedPassword: { type: String, required: true }
 });
 
-const User = model('User', userSchema);
-
-module.exports = User;
-
-//Optional
+// TODO Optional
 userSchema.index({username: 1}, {
     collation: {
         locale: 'en',
@@ -17,3 +13,6 @@ userSchema.index({username: 1}, {
     }
 });
 
+const User = model('User', userSchema);
+
+module.exports = User;
