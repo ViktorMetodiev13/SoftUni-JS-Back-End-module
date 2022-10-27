@@ -4,14 +4,12 @@ const { parseError } = require('../util/parser');
 const authController = require('express').Router();
 
 authController.get('/register', (req, res) => {
-    // TODO replace with actual view by assignment
     res.render('register', {
         title: 'Register Page'
     });
 });
 
 authController.post('/register', async (req, res) => {
-    console.log(req.body);
     try {
         if (req.body.username == '' || req.body.username == '') {
             throw new Error('All fields are required!');
@@ -21,9 +19,7 @@ authController.post('/register', async (req, res) => {
         }
         const token = await register(req.body.username, req.body.password);
 
-        // TODO check if register creates a session
         res.cookie('token', token);
-        // TODO redirect to the right place
         res.redirect('/');
     } catch (error) {
         const errors = parseError(error);
