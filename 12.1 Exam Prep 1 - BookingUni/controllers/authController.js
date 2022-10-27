@@ -31,7 +31,6 @@ authController.post('/register', async (req, res) => {
     } catch (error) {
         const errors = parseError(error);
 
-        // TODO add error display to actual remplate from assignment
         res.render('register', {
             title: 'Register Page',
             errors,
