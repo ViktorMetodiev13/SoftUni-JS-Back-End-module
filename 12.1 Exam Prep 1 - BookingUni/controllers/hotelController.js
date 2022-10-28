@@ -1,12 +1,15 @@
-const { create } = require('../services/hotelService');
+const { create, getById } = require('../services/hotelService');
 const { parseError } = require('../util/parser');
 
 const hotelController = require('express').Router();
 
 
-hotelController.get('/:id/details', (req, res) => {
+hotelController.get('/:id/details', async (req, res) => {
+    const hotel = await getById(req.params.id);
+    
     res.render('details', {
-        title: 'Hotel Details'
+        title: 'Hotel Details',
+        hotel
     });
 });
 
@@ -41,9 +44,12 @@ hotelController.post('/create', async (req, res) => {
     }
 });
 
-hotelController.get('/:id/edit', (req, res) => {
+hotelController.get('/:id/edit', async (req, res) => {
+    const hotel = await getById(req.params.id);
+
     res.render('edit', {
-        title: 'Edit Hotel'
+        title: 'Edit Hotel',
+        hotel
     });
 });
 
