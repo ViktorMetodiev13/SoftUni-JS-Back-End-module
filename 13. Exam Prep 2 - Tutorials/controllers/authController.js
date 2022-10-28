@@ -55,10 +55,10 @@ authController.post('/login', async (req, res) => {
         const token = await login(req.body.username, req.body.password);
 
         res.cookie('token', token);
-        // TODO redirect to the right place
         res.redirect('/');
     } catch (error) {
         const errors = parseError(error);
+        
         res.render('login', {
             title: 'Login Page',
             errors,

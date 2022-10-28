@@ -1,10 +1,15 @@
 const homeController = require('express').Router();
 
 homeController.get('/', (req, res) => {
-    // TODO replace with real controller
-    res.render('home', {
+    let view;
+    if (req.user) {
+        view = 'user-home';
+    } else {
+        view = 'guest-home';
+    }
+
+    res.render(view, {
         title: 'Home Page',
-        user: req.user
     });
 });
 
