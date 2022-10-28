@@ -6,9 +6,10 @@ async function getAllByDate() {
 }
 
 async function createCourse(course) {
-    
+    return Course.create(course);
 }
 
 module.exports = {
     getAllByDate,
+    createCourse
 }
