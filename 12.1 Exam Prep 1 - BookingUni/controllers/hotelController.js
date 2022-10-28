@@ -1,4 +1,4 @@
-const { create, getById, update, deleteById } = require('../services/hotelService');
+const { create, getById, update, deleteById, bookRoom } = require('../services/hotelService');
 const { parseError } = require('../util/parser');
 
 const hotelController = require('express').Router();
@@ -9,6 +9,8 @@ hotelController.get('/:id/details', async (req, res) => {
 
     if (hotel.owner == req.user._id) {
         hotel.isOwner = true;
+    } else if (hotel.bookings.map(b => b.toString()).includes(req.user._id.toString())) {
+        hotel.isBooked = true;
     }
 
     res.render('details', {
@@ -101,6 +103,27 @@ hotelController.get('/:id/delete', async (req, res) => {
 
     await deleteById(req.params.id);
     res.redirect('/');
+});
+
+hotelController.get('/:id/book', async (req, res) => {
+    const hotel = await getById(req.params.id);
+
+    try {
+        if (hotel.owner == req.user._id) {
+            hotel.isOwner = true;
+            throw new Error('Cannot book your own hotel');
+        }
+    
+        await bookRoom(req.params.id, req.user._id);
+        res.redirect(`/hotel/${req.params.id}/details`);
+    } catch (err) {
+        res.render('details', {
+            title: 'Hotel Details',
+            hotel,
+            errors: parseError(err)
+        })
+    }
+    
 });
 
 module.exports = hotelController;
