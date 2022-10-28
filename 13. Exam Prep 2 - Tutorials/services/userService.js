@@ -22,7 +22,6 @@ async function register(username, password) {
 
     user.save();
 
-    // TODO see assignment if registration creates user session
     const token = createSession(user);
 
     return token;
