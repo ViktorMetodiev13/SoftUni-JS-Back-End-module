@@ -6,7 +6,7 @@ async function getAllByDate() {
 }
 
 async function getRecent() {
-    return Course.find({}).sort({ userCount: -1}).limit(3).lean();
+    return Course.find({}).sort({ userCount: -1 }).limit(3).lean();
 }
 
 async function createCourse(course) {
@@ -32,11 +32,19 @@ async function updateCourse(id, data) {
     return existing.save();
 }
 
+async function enrollUser(courseId, userId) {
+    const existing = await Course.findById(courseId);
+    existing.users.push(userId);
+    existing.userCount++;
+    return existing.save();
+}
+
 module.exports = {
     getAllByDate,
     createCourse,
     getRecent,
     getById,
     deleteCourse,
-    updateCourse 
+    updateCourse,
+    enrollUser
 }
