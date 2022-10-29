@@ -1,4 +1,4 @@
-const { createCourse, getById, deleteCourse } = require('../services/courseService');
+const { createCourse, getById, deleteCourse, updateCourse } = require('../services/courseService');
 const { parseError } = require('../util/parser');
 
 const courseController = require('express').Router();
@@ -51,6 +51,38 @@ courseController.post('/create', async (req, res) => {
             errors,
             body: course
         });
+    }
+})
+
+courseController.get('/:id/edit', async (req, res) => {
+    const course = await getById(req.params.id);
+
+    if (course.owner.toString() != req.user._id.toString()) {
+        return res.redirect('/auth/login');
+    }
+
+    res.render('edit', {
+        title: 'Edit Course',
+        course
+    })
+})
+
+courseController.post('/:id/edit', async (req, res) => {
+    const course = await getById(req.params.id);
+
+    if (course.owner.toString() != req.user._id.toString()) {
+        return res.redirect('/auth/login');
+    }
+
+    try {
+        await updateCourse(req.params.id, req.body);
+        res.redirect(`/course/${req.params.id}`);
+    } catch (error) {
+        res.render('edit', {
+            title: 'Edit Course',
+            errors: parseError(error),
+            course: req.body
+        })
     }
 })
 
