@@ -14,6 +14,7 @@ courseController.get('/:id', async (req, res) => {
     const course = await getById(req.params.id);
 
     course.isOwner = course.owner.toString() == req.user._id.toString();
+    course.enrolled = course.users.map(u => u.toString()).includes(req.user._id.toString());
 
     res.render('details', {
         title: course.title,

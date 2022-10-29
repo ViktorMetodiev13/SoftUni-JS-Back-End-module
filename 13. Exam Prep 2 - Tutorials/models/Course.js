@@ -21,7 +21,7 @@ const courseSchema = new Schema({
     createdAt: { type: String, required: true, default: () => (new Date()).toISOString().slice(0, 10) },
     users: { type: [Types.ObjectId], ref: 'User', default: [] },
     userCount: { type: Number, detault: 0 },
-    owner: { type: Types.ObjectId, ref: 'User'},
+    owner: { type: Types.ObjectId, ref: 'User' },
 })
 
 courseSchema.index({ title: 1 }, {
