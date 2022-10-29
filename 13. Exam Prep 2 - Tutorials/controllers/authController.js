@@ -34,7 +34,6 @@ authController.post('/register', isGuest(),
             res.redirect('/');
         } catch (error) {
             const errors = parseError(error);
-            console.log(errors);
 
             res.render('register', {
                 title: 'Register Page',

@@ -1,4 +1,4 @@
-const { createCourse, getById } = require('../services/courseService');
+const { createCourse, getById, deleteCourse } = require('../services/courseService');
 const { parseError } = require('../util/parser');
 
 const courseController = require('express').Router();
@@ -19,6 +19,17 @@ courseController.get('/:id', async (req, res) => {
         title: course.title,
         course
     })
+})
+
+courseController.get('/:id/delete', async (req, res) => {
+    const course = await getById(req.params.id);
+    
+    if (course.owner.toString() != req.user._id.toString()) {
+        return res.redirect('/auth/login');
+    }
+
+    await deleteCourse(req.params.id);
+    res.redirect('/');
 })
 
 courseController.post('/create', async (req, res) => {
