@@ -11,7 +11,6 @@ authController.get('/register', (req, res) => {
 });
 
 authController.post('/register', async (req, res) => {
-    console.log(req.body);
     try {
         if (req.body.username == '' || req.body.username == '') {
             throw new Error('All fields are required!');
@@ -40,6 +39,7 @@ authController.post('/register', async (req, res) => {
 });
 
 authController.get('/login', (req, res) => {
+    // TODO replace with the actual view
     res.render('login', {
         title: 'Login Page'
     });

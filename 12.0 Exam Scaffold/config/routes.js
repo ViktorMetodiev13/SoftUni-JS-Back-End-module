@@ -5,14 +5,4 @@ module.exports = (app) => {
     app.use('/', homeController);
     app.use('/auth', authController);
 
-    app.get('/error', (req, res, next) => {
-        next(new Error('propagating error'));
-    })
-
-    // CRASH
-    // app.use((err, req, res, next) => {
-    //     console.log('Global error handling');
-    //     console.log(err.message);
-    //     res.redirect('/');
-    // })
 }
