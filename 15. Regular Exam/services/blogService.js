@@ -28,10 +28,17 @@ async function updateById(id, data) {
     return existing.save();
 }
 
+async function followUser(courseId, userId) {
+    const existing = await Blog.findById(courseId);
+    existing.followList.push(userId);
+    return existing.save();
+}
+
 module.exports = {
     getAllBlogs,
     createBlog,
     getById,
     deleteBlog,
-    updateById
+    updateById,
+    followUser
 }
