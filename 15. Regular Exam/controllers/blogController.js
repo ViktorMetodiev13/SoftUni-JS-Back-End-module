@@ -1,4 +1,4 @@
-const { createBlog, getAllBlogs, getById } = require('../services/blogService');
+const { createBlog, getAllBlogs, getById, deleteBlog, updateById } = require('../services/blogService');
 const { parseError } = require('../util/parser');
 
 const blogController = require('express').Router();
@@ -12,7 +12,7 @@ blogController.get('/create', (req, res) => {
 
 blogController.get('/blogs', async (req, res) => {
     let blogs = await getAllBlogs();
-    
+
     res.render('blogs', {
         title: "Catalog Page",
         blogs
@@ -21,14 +21,25 @@ blogController.get('/blogs', async (req, res) => {
 
 blogController.get('/:id', async (req, res) => {
     const blog = await getById(req.params.id);
-    const user = req.user._id;
+
+    blog.isOwner = blog.owner.toString() == req.user._id.toString();
 
     res.render('details', {
         title: blog.title,
         blog,
-        user
     });
 });
+
+blogController.get('/:id/delete', async (req, res) => {
+    const blog = await getById(req.params.id);
+
+    if (blog.owner.toString() != req.user._id.toString()) {
+        return res.redirect('/auth/login')
+    };
+
+    await deleteBlog(req.params.id);
+    res.redirect('/blog/blogs');
+})
 
 blogController.post('/create', async (req, res) => {
     const blog = {
@@ -50,6 +61,40 @@ blogController.post('/create', async (req, res) => {
             body: blog
         });
     }
+});
+
+blogController.get('/:id/edit', async (req, res) => {
+    const blog = await getById(req.params.id);
+
+    if (blog.owner.toString() != req.user._id.toString()) {
+        return res.redirect('/auth/login')
+    };
+
+    res.render('edit', {
+        title: 'Edit Blog',
+        blog
+    })
+})
+
+blogController.post('/:id/edit', async (req, res) => {
+    const blog = await getById(req.params.id);
+
+    if (blog.owner.toString() != req.user._id.toString()) {
+        return res.redirect('/auth/login')
+    };
+
+    try {
+        await updateById(req.params.id, req.body);
+
+        res.redirect(`/blog/${req.params.id}`);
+    } catch (error) {
+        res.render('edit', {
+            title: 'Edit Blog',
+            errors: parseError(error),
+            blog: req.body
+        })
+    }
+
 })
 
 module.exports = blogController;
