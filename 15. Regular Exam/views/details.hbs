@@ -1,0 +1,30 @@
+<div class="details-container">
+    {{#with blog}}
+    <div class="details-container-image">
+        <img src="{{imageUrl}}">
+    </div>
+    <div class="details-container-info">
+        <h2>{{title}}</h2>
+        <h3>{{blogCategory}}</h3>
+        <h3>By: {{userEmail}}</h3>
+        {{#if followList}}
+        <h4>Follow By: jace.m, sandra.p</h4>
+        {{else}}
+        <h4>There are no followers yet!</h4>
+        {{/if}}
+    </div>
+    <div class="details-container-content">
+        <p>{{content}}</p>
+    </div>
+    <div class="btn-container">
+        <!-- Only for registered user and creator of the blog post-->
+        <a href="#">Edit</a>
+        <a href="#">Delete</a>
+        <!-- logged in user who has not yet followed the blog-->
+        <a href="#">Follow</a>
+        <!-- logged in user who has already followed the blog-->
+        <p class="follow-pub">You already follow this blog!</p>
+
+    </div>
+    {{/with}}
+</div>
