@@ -17,7 +17,7 @@ const blogSchema = new Schema({
         }
     },
     content: { type: String, minlength: [10, 'Content must be at least 10 characters'], },
-    blogCategory: { type: String, minlength: [10, 'Content must be at least 10 characters'], },
+    blogCategory: { type: String, minlength: [3, 'Blog category must be at least 3 characters'], },
     followList: { type: [Types.ObjectId], ref: 'User', default: [] },
     owner: { type: Types.ObjectId, ref: 'User' }
 })
