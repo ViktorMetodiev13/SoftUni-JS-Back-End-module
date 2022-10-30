@@ -3,21 +3,51 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{title}}</title>
+    <link rel="stylesheet" href="../../static/css/styles.css">
 </head>
 
 <body>
-    <a href="/auth/login">Login</a>
-    <a href="/auth/register">Register</a>
-    <a href="/auth/logout">Logout</a>
+
     {{#if errors}}
     <div>
-        {{#each errors}}
-        <p>{{this}}</p>
-        {{/each}}
+        <div class="errorContainer">
+            {{#each errors}}
+            <p>{{this}}</p>
+            {{/each}}
+        </div>
     </div>
     {{/if}}
-    {{{body}}}
+
+    <div class="navigation">
+        <nav>
+            <img src="../../static/images/logo.jpg">
+            <ul>
+                <!-- Guest users and Logged users -->
+                <li><a href="/">Home</a></li>
+                <li><a href="/blog/catalog">Blogs</a></li>
+                {{#if username}}
+                <li><a href="/profile">Profile</a></li>
+                <li><a href="/blog/create">Create Blog</a></li>
+                <li><a href="/auth/logout">Logout</a></li>
+                {{else}}
+                <li><a href="/auth/login">Login</a></li>
+                <li><a href="/auth/register">Register</a></li>
+                {{/if}}
+
+            </ul>
+        </nav>
+    </div>
+
+
+    <main>
+        {{{body}}}
+    </main>
+
+    <footer>Back-End 2022</footer>
+
 </body>
 
 </html>
