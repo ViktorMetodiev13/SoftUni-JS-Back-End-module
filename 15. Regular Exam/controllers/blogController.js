@@ -1,4 +1,4 @@
-const { createBlog } = require('../services/blogService');
+const { createBlog, getAllBlogs } = require('../services/blogService');
 const { parseError } = require('../util/parser');
 
 const blogController = require('express').Router();
@@ -9,6 +9,14 @@ blogController.get('/create', (req, res) => {
         title: "Create Page"
     });
 });
+
+blogController.get('/blogs', async (req, res) => {
+    let blogs = await getAllBlogs();
+    res.render('blogs', {
+        title: "Catalog Page",
+        blogs
+    });
+})
 
 blogController.post('/create', async (req, res) => {
     const blog = {
