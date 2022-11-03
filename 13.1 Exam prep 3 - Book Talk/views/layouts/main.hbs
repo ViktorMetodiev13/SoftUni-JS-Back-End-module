@@ -13,6 +13,14 @@
 
 <body>
 
+    {{#if errors}}
+    <div class="errorContainer">
+        {{#each errors}}
+        <p>{{this}}</p>
+        {{/each}}
+    </div>
+    {{/if}}
+
     <header class="header">
 
         <div class="header">
@@ -20,12 +28,10 @@
                 <a href="/">Home</a>
                 <a href="/review/catalog">Catalog</a>
                 {{#if username}}
-                <!--Only for logged user-->
                 <a href="/profile">Profile</a>
                 <a href="/review/create">Create Review</a>
                 <a href="/auth/logout">Logout</a>
                 {{else}}
-                <!--Only for guest-->
                 <a href="/auth/login">Login</a>
                 <a href="/auth/register">Register</a>
                 {{/if}}

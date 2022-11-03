@@ -19,13 +19,11 @@ authController.post('/register', async (req, res) => {
         }
         const token = await register(req.body.username, req.body.password);
 
-        // TODO check if register creates a session
         res.cookie('token', token);
         res.redirect('/');
     } catch (error) {
         const errors = parseError(error);
 
-        // TODO add error display to actual remplate from assignment
         res.render('register', {
             title: 'Register Page',
             errors,
