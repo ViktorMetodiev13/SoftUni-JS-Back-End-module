@@ -8,7 +8,7 @@ const { notFound } = require("../controllers/notFound");
 module.exports = (app) => {
     app.use('/', homeController);
     app.use('/auth', authController);
-    app.use('/blog', blogController)
+    app.use('/blog', blogController);
     app.use('/profile', profileController);
     app.all('*', notFound);
 }
